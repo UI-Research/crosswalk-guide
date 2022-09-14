@@ -1,0 +1,59 @@
+---
+title: "Urban Institute Guide for creating and using geographic crosswalks"
+author: "Gabe Morrison and Chris Davis"
+date: October, 2022
+format: html
+editor: visual
+---
+
+# 
+
+## Introduction/Background
+
+
+### Context:
+
+-   Urban researchers often conduct an analysis at a certain geographic scale (e.g. the census tract, zip code, or state).
+-   Many data is provided at different levels of spatial aggregation, or those levels change over time (looking at you, census tracts!).
+-   Thus, we need a need a tool to transform data from one spatial level to another. This is a crosswalk!
+
+### Background: Census Geographies and Nesting!
+
+- The Census Bureau releases all data at a series of 27 different geographic levels.
+- A key concept is that of **nesting**. Some census geographies are entirely composed of other census geographies, making aggregation from the smaller to the larger geographic level simple. 
+- A chart depicting the 27 geographic levels and their relationships to each other can be seen below. 
+
+
+
+![Image from [MCDC](https://mcdc.missouri.edu/geography/sumlevs/)](images/censusgeochart.png)
+
+
+
+- Note that all census blocks are entirely subsumed in census block groups, census block groups are entirely subsumed in census tract, tracts in counties, and counties in states. - Blocks are generally bounded by visible features or boundaries (like roads!).
+
+
+### Background: Blocks, Block Groups, and Tracts in Depth
+- Blocks are statistical entities that tend to be small and are bounded by visible features (e.g. roads, streams, railroad tracks) or non-visible features like city boundaries.
+- Block groups are generally defined to contain 600-3000 people. 
+- Census tracts have between 1200 and 8000 people, and often/ideally close to 4000. Census tract boundaries are made to last over time. 
+
+
+
+
+### Critera for a Crosswalk with Overlapping Geographies:
+
+-   **Geographic Crosswalk** or a **Crosswalk**: a tabular dataset that allows the transformation of data from one geographic level to another 
+
+with at least three columns: a source geography, a target geography, and an interpolation weight. Each record (row) in the crosswalk reflects an intersection between the two geographies, and the interpolation weight tells what portion of the source geography should be allocated to the target geography (https://www.nhgis.org/geographic-crosswalks)
+
+-   Examples in Urban Work
+
+
+Sources/Places to learn more:
+- Blocks are generally bounded by visible features or boundaries (like roads!).
+
+
+https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5
+https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf
+https://mcdc.missouri.edu/geography/sumlevs/
+https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/

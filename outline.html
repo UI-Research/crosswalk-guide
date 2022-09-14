@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Gabe Morrison and Chris Davis">
+<meta name="dcterms.date" content="2022-10-01">
+
+<title>Urban Institute Guide for creating and using geographic crosswalks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="outline_files/libs/clipboard/clipboard.min.js"></script>
+<script src="outline_files/libs/quarto-html/quarto.js"></script>
+<script src="outline_files/libs/quarto-html/popper.min.js"></script>
+<script src="outline_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="outline_files/libs/quarto-html/anchor.min.js"></script>
+<link href="outline_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="outline_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="outline_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="outline_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="outline_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Urban Institute Guide for creating and using geographic crosswalks</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Gabe Morrison and Chris Davis </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 1, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<section id="section" class="level1">
+<h1></h1>
+<section id="introductionbackground" class="level2">
+<h2 class="anchored" data-anchor-id="introductionbackground">Introduction/Background</h2>
+<section id="context" class="level3">
+<h3 class="anchored" data-anchor-id="context">Context:</h3>
+<ul>
+<li>Urban researchers often conduct an analysis at a certain geographic scale (e.g.&nbsp;the census tract, zip code, or state).</li>
+<li>Many data is provided at different levels of spatial aggregation, or those levels change over time (looking at you, census tracts!).</li>
+<li>Thus, we need a need a tool to transform data from one spatial level to another. This is a crosswalk!</li>
+</ul>
+</section>
+<section id="background-census-geographies-and-nesting" class="level3">
+<h3 class="anchored" data-anchor-id="background-census-geographies-and-nesting">Background: Census Geographies and Nesting!</h3>
+<ul>
+<li>The Census Bureau releases all data at a series of 27 different geographic levels.</li>
+<li>A key concept is that of <strong>nesting</strong>. Some census geographies are entirely composed of other census geographies, making aggregation from the smaller to the larger geographic level simple.</li>
+<li>A chart depicting the 27 geographic levels and their relationships to each other can be seen below.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/censusgeochart.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image from <a href="https://mcdc.missouri.edu/geography/sumlevs/">MCDC</a></figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li>Note that all census blocks are entirely subsumed in census block groups, census block groups are entirely subsumed in census tract, tracts in counties, and counties in states. - Blocks are generally bounded by visible features or boundaries (like roads!).</li>
+</ul>
+</section>
+<section id="background-blocks-block-groups-and-tracts-in-depth" class="level3">
+<h3 class="anchored" data-anchor-id="background-blocks-block-groups-and-tracts-in-depth">Background: Blocks, Block Groups, and Tracts in Depth</h3>
+<ul>
+<li>Blocks are statistical entities that tend to be small and are bounded by visible features (e.g.&nbsp;roads, streams, railroad tracks) or non-visible features like city boundaries.</li>
+<li>Block groups are generally defined to contain 600-3000 people.</li>
+<li>Census tracts have between 1200 and 8000 people, and often/ideally close to 4000. Census tract boundaries are made to last over time.</li>
+</ul>
+</section>
+<section id="critera-for-a-crosswalk-with-overlapping-geographies" class="level3">
+<h3 class="anchored" data-anchor-id="critera-for-a-crosswalk-with-overlapping-geographies">Critera for a Crosswalk with Overlapping Geographies:</h3>
+<ul>
+<li><strong>Geographic Crosswalk</strong> or a <strong>Crosswalk</strong>: a tabular dataset that allows the transformation of data from one geographic level to another</li>
+</ul>
+<p>with at least three columns: a source geography, a target geography, and an interpolation weight. Each record (row) in the crosswalk reflects an intersection between the two geographies, and the interpolation weight tells what portion of the source geography should be allocated to the target geography (https://www.nhgis.org/geographic-crosswalks)</p>
+<ul>
+<li>Examples in Urban Work</li>
+</ul>
+<p>Sources/Places to learn more: - Blocks are generally bounded by visible features or boundaries (like roads!).</p>
+<p>https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5 https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf https://mcdc.missouri.edu/geography/sumlevs/ https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/</p>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
