@@ -75,9 +75,10 @@ ul.task-list{list-style: none;}
 <section id="context" class="level3">
 <h3 class="anchored" data-anchor-id="context">Context:</h3>
 <ul>
-<li>Urban researchers often conduct an analysis at a certain geographic scale (e.g.&nbsp;the census tract, zip code, or state).</li>
-<li>Many data is provided at different levels of spatial aggregation, or those levels change over time (looking at you, census tracts!).</li>
-<li>Thus, we need a need a tool to transform data from one spatial level to another. This is a crosswalk!</li>
+<li><p>Urban researchers often conduct an analysis at a certain geographic scale (e.g.&nbsp;the census tract, zip code, or state).</p></li>
+<li><p>Many data is provided at different levels of spatial aggregation, or those levels change over time (looking at you, census tracts!).</p></li>
+<li><p>Thus, we need a need a tool to transform data from one spatial level to another. This is a crosswalk!</p></li>
+<li><p>A note on nomenclature: (geographic) crosswalks are also called correlation lists, equivalency files, or geographic correspondence files.</p></li>
 </ul>
 </section>
 <section id="background-census-geographies-and-nesting" class="level3">
@@ -94,7 +95,8 @@ ul.task-list{list-style: none;}
 </figure>
 </div>
 <ul>
-<li>Note that all census blocks are entirely subsumed in census block groups, census block groups are entirely subsumed in census tract, tracts in counties, and counties in states. - Blocks are generally bounded by visible features or boundaries (like roads!).</li>
+<li>Note that all census blocks are entirely nested within census block groups, census block groups within census tract, tracts in counties, and counties within states.</li>
+<li>Blocks are generally bounded by visible features or boundaries (like roads!).</li>
 </ul>
 </section>
 <section id="background-blocks-block-groups-and-tracts-in-depth" class="level3">
@@ -103,19 +105,91 @@ ul.task-list{list-style: none;}
 <li>Blocks are statistical entities that tend to be small and are bounded by visible features (e.g.&nbsp;roads, streams, railroad tracks) or non-visible features like city boundaries.</li>
 <li>Block groups are generally defined to contain 600-3000 people.</li>
 <li>Census tracts have between 1200 and 8000 people, and often/ideally close to 4000. Census tract boundaries are made to last over time.</li>
+<li>Because of these population limitations, these geographic levels can change over time. Such changes necessitate crosswalks.</li>
 </ul>
 </section>
-<section id="critera-for-a-crosswalk-with-overlapping-geographies" class="level3">
-<h3 class="anchored" data-anchor-id="critera-for-a-crosswalk-with-overlapping-geographies">Critera for a Crosswalk with Overlapping Geographies:</h3>
+<section id="tiger-fips-codes-and-when-you-do-not-need-to-use-a-crosswalk" class="level3">
+<h3 class="anchored" data-anchor-id="tiger-fips-codes-and-when-you-do-not-need-to-use-a-crosswalk">TIGER, FIPS Codes and When you do not need to use a Crosswalk:</h3>
 <ul>
-<li><strong>Geographic Crosswalk</strong> or a <strong>Crosswalk</strong>: a tabular dataset that allows the transformation of data from one geographic level to another</li>
+<li><p>The Census Bureau releases spatial data outlining census geography in their TIGER/Line Shapefiles.</p></li>
+<li><p>In the TIGER/Line Shapefiles, each geographic unit (e.g.&nbsp;a census tract or block) has a unique geographic identifier, or GEOID.</p></li>
+<li><p>GEOIDs have a great naming convention, some of which we outline below.</p></li>
 </ul>
+<table class="table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 14%">
+<col style="width: 23%">
+<col style="width: 18%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Geographic Level</th>
+<th>Structure</th>
+<th>Number of Digits</th>
+<th style="text-align: right;">Example Area</th>
+<th style="text-align: right;">Example GEOID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>State</td>
+<td>STATE</td>
+<td>2</td>
+<td style="text-align: right;">Texas</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td>County</td>
+<td>STATE + County</td>
+<td>2+3 =5</td>
+<td style="text-align: right;">Harris County, Texas</td>
+<td style="text-align: right;">48201</td>
+</tr>
+<tr class="odd">
+<td>Tract</td>
+<td>STATE + COUNTY + TRACT</td>
+<td>2 +3 + 6 = 11</td>
+<td style="text-align: right;">Tract 2231 in Harris County, Texas</td>
+<td style="text-align: right;">48201223100</td>
+</tr>
+<tr class="even">
+<td>Block Group</td>
+<td>STATE + COUNTY + TRACT + BLOCK GROUP</td>
+<td>2+3+6+1 = 12</td>
+<td style="text-align: right;">Block Group 1 in Census Tract 2231 in Harris County, TX</td>
+<td style="text-align: right;">482012231001</td>
+</tr>
+<tr class="odd">
+<td>Block</td>
+<td>STATE + COUNTY + TRACT + BLOCK GROUP + BLOCK</td>
+<td>2+3+6+4 = 15</td>
+<td style="text-align: right;">Block 1050 in Census Tract 2231 in Harris County, TX</td>
+<td style="text-align: right;">482012231001050</td>
+</tr>
+</tbody>
+</table>
+<p>Example from <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html#:~:text=FIPS%20codes%20are%20assigned%20alphabetically,Native%20Hawaiian%20(AIANNH)%20areas.">The Census</a></p>
+<ul>
+<li>This naming scheme means that you do not need a crosswalk to simply aggregate from smaller to larger levels of geography if working with data all at the same geographic scale.</li>
+<li>Instead, you simply need to:
+<ol type="1">
+<li>Create a new column in your dataframe with the GEOID truncated to the new geographic level.</li>
+<li>Group by and summarize the data using the higher geographic scale.</li>
+</ol></li>
+</ul>
+</section>
+<section id="the-knitty-gritty-of-crosswalks" class="level3">
+<h3 class="anchored" data-anchor-id="the-knitty-gritty-of-crosswalks">The Knitty-Gritty of Crosswalks</h3>
 <p>with at least three columns: a source geography, a target geography, and an interpolation weight. Each record (row) in the crosswalk reflects an intersection between the two geographies, and the interpolation weight tells what portion of the source geography should be allocated to the target geography (https://www.nhgis.org/geographic-crosswalks)</p>
-<ul>
-<li>Examples in Urban Work</li>
-</ul>
-<p>Sources/Places to learn more: - Blocks are generally bounded by visible features or boundaries (like roads!).</p>
-<p>https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5 https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf https://mcdc.missouri.edu/geography/sumlevs/ https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/</p>
+</section>
+<section id="examples-in-urban-work" class="level3">
+<h3 class="anchored" data-anchor-id="examples-in-urban-work">Examples in Urban Work</h3>
+</section>
+<section id="sourcesplaces-to-learn-more" class="level3">
+<h3 class="anchored" data-anchor-id="sourcesplaces-to-learn-more">Sources/Places to learn more:</h3>
+<p>https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5 https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf https://mcdc.missouri.edu/geography/sumlevs/ https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/ https://mcdc.missouri.edu/applications/docs/geocorr2022-help.html#afact2</p>
 </section>
 </section>
 </section>

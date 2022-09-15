@@ -10,50 +10,113 @@ editor: visual
 
 ## Introduction/Background
 
-
 ### Context:
 
 -   Urban researchers often conduct an analysis at a certain geographic scale (e.g. the census tract, zip code, or state).
 -   Many data is provided at different levels of spatial aggregation, or those levels change over time (looking at you, census tracts!).
 -   Thus, we need a need a tool to transform data from one spatial level to another. This is a crosswalk!
 
+- A note on nomenclature: (geographic) crosswalks are also called correlation lists, equivalency files, or geographic correspondence files. 
+
 ### Background: Census Geographies and Nesting!
 
-- The Census Bureau releases all data at a series of 27 different geographic levels.
-- A key concept is that of **nesting**. Some census geographies are entirely composed of other census geographies, making aggregation from the smaller to the larger geographic level simple. 
-- A chart depicting the 27 geographic levels and their relationships to each other can be seen below. 
-
-
+-   The Census Bureau releases all data at a series of 27 different geographic levels.
+-   A key concept is that of **nesting**. Some census geographies are entirely composed of other census geographies, making aggregation from the smaller to the larger geographic level simple.
+-   A chart depicting the 27 geographic levels and their relationships to each other can be seen below.
 
 ![Image from [MCDC](https://mcdc.missouri.edu/geography/sumlevs/)](images/censusgeochart.png)
 
-
-
-- Note that all census blocks are entirely subsumed in census block groups, census block groups are entirely subsumed in census tract, tracts in counties, and counties in states. - Blocks are generally bounded by visible features or boundaries (like roads!).
-
-
-### Background: Blocks, Block Groups, and Tracts in Depth
-- Blocks are statistical entities that tend to be small and are bounded by visible features (e.g. roads, streams, railroad tracks) or non-visible features like city boundaries.
-- Block groups are generally defined to contain 600-3000 people. 
-- Census tracts have between 1200 and 8000 people, and often/ideally close to 4000. Census tract boundaries are made to last over time. 
-
-
-
-
-### Critera for a Crosswalk with Overlapping Geographies:
-
--   **Geographic Crosswalk** or a **Crosswalk**: a tabular dataset that allows the transformation of data from one geographic level to another 
-
-with at least three columns: a source geography, a target geography, and an interpolation weight. Each record (row) in the crosswalk reflects an intersection between the two geographies, and the interpolation weight tells what portion of the source geography should be allocated to the target geography (https://www.nhgis.org/geographic-crosswalks)
-
--   Examples in Urban Work
-
-
-Sources/Places to learn more:
+-   Note that all census blocks are entirely nested within census block groups, census block groups within census tract, tracts in counties, and counties within states.
 - Blocks are generally bounded by visible features or boundaries (like roads!).
 
+### Background: Blocks, Block Groups, and Tracts in Depth
 
-https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5
-https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf
-https://mcdc.missouri.edu/geography/sumlevs/
-https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/
+-   Blocks are statistical entities that tend to be small and are bounded by visible features (e.g. roads, streams, railroad tracks) or non-visible features like city boundaries.
+-   Block groups are generally defined to contain 600-3000 people.
+-   Census tracts have between 1200 and 8000 people, and often/ideally close to 4000. Census tract boundaries are made to last over time.
+-   Because of these population limitations, these geographic levels can change over time. Such changes necessitate crosswalks. 
+
+### TIGER, FIPS Codes and When you do not need to use a Crosswalk:
+-   The Census Bureau releases spatial data outlining census geography in their TIGER/Line Shapefiles. 
+- In the TIGER/Line Shapefiles, each geographic unit (e.g. a census tract or block) has a unique geographic identifier, or GEOID.
+
+
+-   GEOIDs have a great naming convention, some of which we outline below. 
+
+| Geographic Level | Structure | Number of Digits | Example Area | Example GEOID |
+|------------------|-----------|------------------|-------------:|--------------:|
+| State            |STATE      | 2                |    Texas     |  48           |
+| County          |STATE + County      | 2+3 =5   |Harris County, Texas|48201|
+| Tract | STATE + COUNTY + TRACT|  2 +3 + 6 = 11 |Tract 2231 in Harris County, Texas|48201223100| 
+| Block Group | STATE + COUNTY + TRACT + BLOCK GROUP|2+3+6+1 = 12|Block Group 1 in Census Tract 2231 in Harris County, TX|  482012231001   |
+| Block | STATE + COUNTY + TRACT + BLOCK GROUP + BLOCK|2+3+6+4 = 15|Block 1050 in Census Tract 2231 in Harris County, TX| 482012231001050   | 
+
+Example from [The Census](https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html#:~:text=FIPS%20codes%20are%20assigned%20alphabetically,Native%20Hawaiian%20(AIANNH)%20areas.)
+ 
+- Other geographic levels also follow this scheme, and you can learn more at the link above. 
+- We list these examples because they show how the naming convention makes use of the fact that these geographies nest within each other. 
+ 
+- This naming scheme means that you do not need a crosswalk to simply aggregate from smaller to larger levels of geography if working with data all at the same geographic scale. 
+- Instead, you simply need to:
+    (1) Create a new column in your dataframe with the GEOID truncated to the new geographic level.
+    (2) Group by and summarize the data using the higher geographic scale. 
+    
+## The Knitty-Gritty of Crosswalks
+
+### Definition: 
+A geographic crosswalk is a tabular dataset with at least the following three columns:
+(1) a source geography - a column that uniquely identifies the geographic scale of the source data
+(2) the target geography - a column that identifies the geographic coverage which we want to relate to the source areas
+(3) an interpolation weight (also known as an allocation factor) - a column that identifies the portion of the source area that is located in the target area
+
+Every row in this dataset can be thought of as an "atom." Each atom is some subdivision of source and target geographic levels. 
+
+To crosswalk data from one scale to another, one can use the following algorithm:
+(1) Join data at the source geography to the geographic crosswalk (using the geographic identifier). 
+(2) Multiply the data to be cross-walked at the source geography by the interpolation weight
+(3) Sum the data by the target geography
+
+### Example: 
+The above definition is a bit abstract, so here is an example. Suppose we have data at a fictitious geography "Green." 
+
+<Insert green image>
+
+Perhaps we hope to transform that data to geographic scale blue (likely to join with other data):
+
+<Insert Blue>
+
+Overlaying these geographies would lead to the creation of four unique atoms:
+
+
+A Green-to-Blue crosswalk would allow for the estimation of the data at the green geographic scale to the blue geographic level. The crosswalk could look something like the following:
+
+```{r, echo = F}
+Green <- c("A", "A", "B", "B")
+Blue <- c("A", "B", "B", "C")
+Interpolation_Weights <- c(.85, .15, .7, .3)
+crosswalk <- data.frame(Green, Blue, Interpolation_Weights)
+crosswalk
+
+```
+
+Note how, for each of the target geometries (Blue), the interpolation weights sum to 1. This shows how the total contribution of each cell in a target geometry sums to 100% of that geometry.  
+
+Suppose we have the following data at the green geographic level:
+
+```{r}
+
+data <- c(200, 100)
+geography <- c("A", "B")
+
+green_pop <-data.frame(geography, data)
+green_pop
+```
+
+
+
+### Examples in Urban Work
+
+### Sources/Places to learn more: 
+
+https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5 https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf https://mcdc.missouri.edu/geography/sumlevs/ https://datadrivendetroit.org/blog/2021/09/16/2020-census-tract-changes/
+https://mcdc.missouri.edu/applications/docs/geocorr2022-help.html#afact2
