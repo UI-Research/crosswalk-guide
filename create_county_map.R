@@ -33,19 +33,42 @@ my_plot <-   ggplot() +
 ggsave("www/images/pennsylvania_county.png", plot = my_plot) 
 
 
-my_zctas <- zctas(year = 2019)
+my_zctas <- zctas(year = 2019) %>% 
+  mutate(zcta_area = st_area(.))
 
 pen_zips_sf <- my_zctas %>% 
   #st_transform("EPSG:2163") %>%
-  st_intersection(my_pen_counties) 
+  st_intersection(my_pen_counties) %>% 
+  mutate(int_area = st_area(.), 
+         perc = as.numeric(int_area)/as.numeric(zcta_area))
 
 pen_zips <- pen_zips_sf %>%
   st_drop_geometry()
 
+pen_zips_filtered <- pen_zips_sf %>% 
+  filter( perc > .01)
+
 my_plot_zctas <- my_zctas %>% 
-  filter(GEOID10 %in% pen_zips$GEOID10) %>% 
+  filter(GEOID10 %in% pen_zips_filtered$GEOID10) %>% 
   ggplot() +
   geom_sf(mapping = aes(), fill= NA, color = palette_urbn_cyan[2], size = 1.3) + 
-  geom_sf(my_pen_counties, mapping = aes(), fill = NA, color = palette_urbn_cyan[6], size = 1.3)
+  geom_sf(my_pen_counties, mapping = aes(), fill = NA, color = palette_urbn_cyan[6], size = 1.3) 
 
 ggsave("www/images/zcta_plot_small.png", plot = my_plot_zctas)
+
+pen_zips_filtered_2 <- filter(pen_zips_filtered, perc < .99)
+
+my_zcta_filtered <- filter(my_zctas, GEOID10 %in% pen_zips_filtered_2$GEOID10)
+
+my_plot_zctas_2 <- 
+ 
+  my_zctas %>% 
+  filter(GEOID10 %in% pen_zips_filtered$GEOID10) %>% 
+  ggplot() +
+  geom_sf(my_zcta_filtered, mapping = aes(), fill= palette_urbn_gray[1], color = palette_urbn_cyan[2], size = 1.3) + 
+  geom_sf(mapping = aes(), fill= NA, color = palette_urbn_cyan[1], size = .8) + 
+  geom_sf(pen_zips_filtered_2, mapping = aes(), fill = palette_urbn_cyan[1], color = NA) + 
+  geom_sf(my_zcta_filtered, mapping = aes(), fill= NA, color = palette_urbn_cyan[2], size = 1.3) + 
+  geom_sf(my_pen_counties, mapping = aes(), fill = NA, color = palette_urbn_cyan[6], size = 1.3) 
+
+ggsave("www/images/zcta_plot_small_w_int.png", plot = my_plot_zctas_2)
