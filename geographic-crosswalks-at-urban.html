@@ -603,7 +603,7 @@ Note
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># path to crosswalk </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>xwalk_path <span class="ot">&lt;-</span> <span class="st">"tract_to_place_geocorr.csv"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>xwalk_path <span class="ot">&lt;-</span> <span class="st">"https://coding-library.s3.amazonaws.com/tract_to_place_geocorr.csv"</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in column names of crosswalk in order to read in easier</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>xwalk_names <span class="ot">&lt;-</span>  xwalk_path <span class="sc">%&gt;%</span> </span>
@@ -633,7 +633,7 @@ Note
 <p>The first step when using a clean crosswalk is to join or merge the data that you want to transform to the crosswalk <strong>by the source geography identifier</strong>. This is typically the Census FIPS code for Census data, but non-census crosswalks may have other ways of identifying unique source geographies.</p>
 <p>As an example, let’s say that we have a dataset with information about the number of trees at the tract level that we would like to aggregate to the place level.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tract_source_data <span class="ot">&lt;-</span> <span class="st">"tract_source_data.csv"</span> <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tract_source_data <span class="ot">&lt;-</span> <span class="st">"https://coding-library.s3.amazonaws.com/tract_source_data.csv"</span> <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source_geoid =</span> <span class="fu">str_pad</span>(geoid, </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="dv">11</span>, </span>

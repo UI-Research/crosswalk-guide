@@ -6,8 +6,10 @@ format:
   html:
     css: here::here("www", "web_report.css")
     toc: true
+    toc_float: TRUE
     toc-depth: 5
 editor: visual
+pandoc_args: "--tab-stop=2"
 ---
 
 ## What Are Geographic Crosswalks?   
