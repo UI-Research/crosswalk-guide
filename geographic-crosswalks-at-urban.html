@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Geographic Crosswalks at Urban</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="geographic-crosswalks-at-urban_files/libs/clipboard/clipboard.min.js"></script>
+<script src="geographic-crosswalks-at-urban_files/libs/quarto-html/quarto.js"></script>
+<script src="geographic-crosswalks-at-urban_files/libs/quarto-html/popper.min.js"></script>
+<script src="geographic-crosswalks-at-urban_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="geographic-crosswalks-at-urban_files/libs/quarto-html/anchor.min.js"></script>
+<link href="geographic-crosswalks-at-urban_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="geographic-crosswalks-at-urban_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="geographic-crosswalks-at-urban_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="geographic-crosswalks-at-urban_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="geographic-crosswalks-at-urban_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="here::here(" www",="" "web_report.css")"="">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-are-geographic-crosswalks" id="toc-what-are-geographic-crosswalks" class="nav-link active" data-scroll-target="#what-are-geographic-crosswalks">What Are Geographic Crosswalks?</a>
+  <ul>
+  <li><a href="#geographic-crosswalk-structure" id="toc-geographic-crosswalk-structure" class="nav-link" data-scroll-target="#geographic-crosswalk-structure">Geographic Crosswalk Structure</a></li>
+  </ul></li>
+  <li><a href="#do-i-need-a-crosswalk" id="toc-do-i-need-a-crosswalk" class="nav-link" data-scroll-target="#do-i-need-a-crosswalk">Do I Need A Crosswalk?</a>
+  <ul>
+  <li><a href="#we-often-use-geographic-crosswalks-when" id="toc-we-often-use-geographic-crosswalks-when" class="nav-link" data-scroll-target="#we-often-use-geographic-crosswalks-when">We <strong>often use</strong> geographic crosswalks when:</a></li>
+  <li><a href="#we-do-not-need-to-use-geographic-crosswalks-when" id="toc-we-do-not-need-to-use-geographic-crosswalks-when" class="nav-link" data-scroll-target="#we-do-not-need-to-use-geographic-crosswalks-when">We <strong>do not need to use</strong> geographic crosswalks when:</a></li>
+  </ul></li>
+  <li><a href="#are-my-geographies-nested" id="toc-are-my-geographies-nested" class="nav-link" data-scroll-target="#are-my-geographies-nested">Are My Geographies Nested?</a>
+  <ul>
+  <li><a href="#why-is-nested-data-important" id="toc-why-is-nested-data-important" class="nav-link" data-scroll-target="#why-is-nested-data-important">Why is Nested Data Important?</a></li>
+  <li><a href="#common-nested-geographies" id="toc-common-nested-geographies" class="nav-link" data-scroll-target="#common-nested-geographies">Common Nested Geographies</a></li>
+  </ul></li>
+  <li><a href="#obtaining-geographic-crosswalks" id="toc-obtaining-geographic-crosswalks" class="nav-link" data-scroll-target="#obtaining-geographic-crosswalks">Obtaining Geographic Crosswalks</a>
+  <ul>
+  <li><a href="#census-geographic-transformations" id="toc-census-geographic-transformations" class="nav-link" data-scroll-target="#census-geographic-transformations">Census Geographic Transformations</a>
+  <ul>
+  <li><a href="#multiple-versions" id="toc-multiple-versions" class="nav-link" data-scroll-target="#multiple-versions">Multiple Versions</a></li>
+  <li><a href="#choosing-states-source-and-target-geographies" id="toc-choosing-states-source-and-target-geographies" class="nav-link" data-scroll-target="#choosing-states-source-and-target-geographies">Choosing States, Source, and Target Geographies</a></li>
+  <li><a href="#choosing-weights" id="toc-choosing-weights" class="nav-link" data-scroll-target="#choosing-weights">Choosing Weights</a></li>
+  <li><a href="#running-the-crosswalk-request" id="toc-running-the-crosswalk-request" class="nav-link" data-scroll-target="#running-the-crosswalk-request">Running the Crosswalk Request</a></li>
+  </ul></li>
+  <li><a href="#geographic-identifiers-and-collapsing-geoids" id="toc-geographic-identifiers-and-collapsing-geoids" class="nav-link" data-scroll-target="#geographic-identifiers-and-collapsing-geoids">Geographic Identifiers and Collapsing GEOIDs</a></li>
+  <li><a href="#crosswalks-over-time" id="toc-crosswalks-over-time" class="nav-link" data-scroll-target="#crosswalks-over-time">Crosswalks Over Time</a>
+  <ul>
+  <li><a href="#options-for-crosswalks-over-time" id="toc-options-for-crosswalks-over-time" class="nav-link" data-scroll-target="#options-for-crosswalks-over-time">Options for Crosswalks Over Time</a></li>
+  </ul></li>
+  <li><a href="#zip-code-to-zcta-crosswalk" id="toc-zip-code-to-zcta-crosswalk" class="nav-link" data-scroll-target="#zip-code-to-zcta-crosswalk">Zip Code to ZCTA crosswalk</a></li>
+  <li><a href="#creating-your-own-crosswalk" id="toc-creating-your-own-crosswalk" class="nav-link" data-scroll-target="#creating-your-own-crosswalk">Creating Your Own Crosswalk</a>
+  <ul>
+  <li><a href="#using-land-area-weights" id="toc-using-land-area-weights" class="nav-link" data-scroll-target="#using-land-area-weights">Using Land Area Weights</a></li>
+  <li><a href="#adding-population-weights" id="toc-adding-population-weights" class="nav-link" data-scroll-target="#adding-population-weights">Adding Population Weights</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#using-crosswalks" id="toc-using-crosswalks" class="nav-link" data-scroll-target="#using-crosswalks">Using Crosswalks</a>
+  <ul>
+  <li><a href="#crosswalk-preparation" id="toc-crosswalk-preparation" class="nav-link" data-scroll-target="#crosswalk-preparation">Crosswalk Preparation</a></li>
+  <li><a href="#joining-the-data" id="toc-joining-the-data" class="nav-link" data-scroll-target="#joining-the-data">Joining the Data</a></li>
+  <li><a href="#use-the-weight-variable" id="toc-use-the-weight-variable" class="nav-link" data-scroll-target="#use-the-weight-variable">Use the Weight Variable</a>
+  <ul>
+  <li><a href="#options-for-count-variables" id="toc-options-for-count-variables" class="nav-link" data-scroll-target="#options-for-count-variables">Options for Count Variables</a>
+  <ul class="collapse">
+  <li><a href="#multiplying-source-data-by-the-weight" id="toc-multiplying-source-data-by-the-weight" class="nav-link" data-scroll-target="#multiplying-source-data-by-the-weight">Multiplying Source Data by the Weight</a></li>
+  <li><a href="#one-target-for-each-source" id="toc-one-target-for-each-source" class="nav-link" data-scroll-target="#one-target-for-each-source">One Target for Each Source</a></li>
+  </ul></li>
+  <li><a href="#options-for-non-count-variables" id="toc-options-for-non-count-variables" class="nav-link" data-scroll-target="#options-for-non-count-variables">Options for Non-Count Variables</a>
+  <ul class="collapse">
+  <li><a href="#using-a-count-variable-to-adjust" id="toc-using-a-count-variable-to-adjust" class="nav-link" data-scroll-target="#using-a-count-variable-to-adjust">Using a Count Variable to Adjust</a></li>
+  <li><a href="#using-the-target-weight-instead-of-the-source-weight" id="toc-using-the-target-weight-instead-of-the-source-weight" class="nav-link" data-scroll-target="#using-the-target-weight-instead-of-the-source-weight">Using the Target Weight Instead of the Source Weight</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#summarise-by-target-geography" id="toc-summarise-by-target-geography" class="nav-link" data-scroll-target="#summarise-by-target-geography">Summarise by Target Geography</a></li>
+  </ul></li>
+  <li><a href="#sources-to-learn-more" id="toc-sources-to-learn-more" class="nav-link" data-scroll-target="#sources-to-learn-more">Sources to Learn More</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Geographic Crosswalks at Urban</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="what-are-geographic-crosswalks" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="what-are-geographic-crosswalks">What Are Geographic Crosswalks?</h2>
+<p>Urban researchers often conduct analyses that require the use of data that contain geographic information. What do we do, though, when we have multiple data sources at different geographic levels, such as census tract, zip code, place, or state? What if we have data at one level of geography but do not have data at the geographic level we want represent? And how would we standardize geographies that change spatially over time? (Looking at you census tracts!)</p>
+<p>We need a tool to transform data from one spatial level to another. This is a crosswalk! Geographic crosswalks, also called correlation lists, equivalency files, or geographic correspondence files, allow us to approximate data from one geographic level to another.</p>
+<p><img src="www/images/geocorr_zcta_county.png" class="img-fluid"></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><br>
+<br>
+<br>
+<br>
+<br>
+This image is an example of a geographic crosswalk - from ZCTA to county. We will go into more detail later as to how to use this to approximate data at one geographic level from another.</p>
+</div></div><section id="geographic-crosswalk-structure" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-crosswalk-structure">Geographic Crosswalk Structure</h3>
+<p>A geographic crosswalk is a tabular dataset with at minimum the following two columns:</p>
+<ol type="1">
+<li>a <strong>source geography</strong> - a column that uniquely identifies the geographic scale of the source data</li>
+<li>the <strong>target geography</strong> - a column that identifies the geographic coverage which we want to relate to the source areas; the geography of the data we want to end up with</li>
+</ol>
+<p>If your geographies are <strong>not nested</strong> (more on that later), there also may also be a couple other relevant columns:</p>
+<ol start="3" type="1">
+<li>a <strong>size</strong> - a column that identifies some value to the size of an intersection, like population or land area</li>
+<li>a <strong>weight</strong> (also known as an allocation factor) - a column that identifies the portion of the source area that is located in the target area</li>
+</ol>
+<p>Each row in the crosswalk represents an <strong>intersection</strong> between the source and target geographies. For <strong>not nested</strong> data, generally a <strong>weight</strong> is required to allow to approximate the portion of the data in the source area that is located in the target area.</p>
+</section>
+</section>
+<section id="do-i-need-a-crosswalk" class="level2">
+<h2 class="anchored" data-anchor-id="do-i-need-a-crosswalk">Do I Need A Crosswalk?</h2>
+<section id="we-often-use-geographic-crosswalks-when" class="level5">
+<h5 class="anchored" data-anchor-id="we-often-use-geographic-crosswalks-when">We <strong>often use</strong> geographic crosswalks when:</h5>
+<ul>
+<li>We have multiple data sources at different geographic levels and want to merge those data together by geographic location</li>
+<li>We have data at one level of geography but do not have data at the geographic level we want to represent</li>
+<li>We want to standardize geographies over time</li>
+</ul>
+</section>
+<section id="we-do-not-need-to-use-geographic-crosswalks-when" class="level5">
+<h5 class="anchored" data-anchor-id="we-do-not-need-to-use-geographic-crosswalks-when">We <strong>do not need to use</strong> geographic crosswalks when:</h5>
+<ul>
+<li><p><strong>Data is available at the geography we need it to be.</strong> It is usually much better to download data at the geography you need it than to go through a geographic crosswalk. This can save some steps and reduce error, especially if your data is not <em>nested</em> (more on that later).</p></li>
+<li><p><strong>We have address data and we would like to add information regarding a geographic boundary.</strong> If you have address data, you can do a <em>spatial join</em> instead of using a geographic crosswalk to add geographic information, as long as the geographic data (such as a shapefile) is available. To do so in R, you can use <code>sf::st_join</code> to complete this task.</p></li>
+</ul>
+</section>
+</section>
+<section id="are-my-geographies-nested" class="level2 page-columns page-full">
+<h2 class="anchored" data-anchor-id="are-my-geographies-nested">Are My Geographies Nested?</h2>
+<p>One of the key things to determine before using a geographic crosswalk is to consider whether the geography of the data you already have is <strong>nested</strong> within the geography that you would like to have. Your geography is <strong>nested</strong> if, when aggregating, it completely and neatly fits within the desired geography.</p>
+<p>For example, let’s say you have data at the census tract level, but would like to represent your data at the county level. Census tracts are <strong>nested</strong> within counties, meaning they completely are encompassed by counties and there is complete overlap when aggregating census tracts to counties.</p>
+<p><br>
+<br>
+</p>
+<p><img src="www/images/county_w_legend.png" width="600"></p>
+<p>Data is <strong>not nested</strong> if the boundaries do not align spatially even upon geographic aggregation.</p>
+<p>For example, Zip Code Tabulation Areas (ZCTAs), which are Census-created spatial approximations of zip codes, are not nested within counties (or states for that matter).</p>
+<p><br>
+<br>
+</p>
+<p><img src="www/images/zcta_county_plot_w_legend.png" class="img-fluid"></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When going from a source larger geography to a target smaller geography, we would consider that transformation <strong>unnested</strong>, even if the target geography is nested within the source geography. The direction matters: census tract are nested within counties, but counties are not nested within census tracts.</p>
+</div>
+</div>
+<section id="why-is-nested-data-important" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="why-is-nested-data-important">Why is Nested Data Important?</h3>
+<p>Nested data is important when using geographic crosswalks because it makes the transformation from one geography to another much more simple.</p>
+<p>With data that is not nested, we will need to approximate the area that intersects with the geography you are transforming to. We can use our geographic crosswalk to do so.</p>
+<p><br>
+<br>
+</p>
+<p><img src="www/images/zcta_county_w_int_w_legend.png" class="img-fluid"></p>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><br>
+<br>
+<br>
+<br>
+<br>
+In this image, the shaded blue portions of the ZCTAs represent the <strong>intersection</strong> areas where the ZCTAs and county overlap, while the shaded gray portion represents where those same ZCTAs are outside of the county.<br>
+<br>
+When doing a crosswalk conversion, we need to deal with this use case, where part of a geography is split by another geography.</p>
+</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have the choice between going from a nested source data or an unnested source data, it is best to use nested data. With nested data, geographies perfectly align and error will be reduced. For example, if your target is the county level, and you have both census tract and ZCTA level data, use the census tract data to aggregate to county.</p>
+</div>
+</div>
+</section>
+<section id="common-nested-geographies" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="common-nested-geographies">Common Nested Geographies</h3>
+<p>The Census Bureau defines and releases spatial data at multiple geographic levels to support censuses and surveys and create standards across governmental units. As Urban researchers, we often use Census Bureau survey and geographic data, such as data from the Decennial Census or the American Community Survey.</p>
+<p>All Census Bureau geographies are built from the census block level, which are the smallest Census Bureau geographic unit. So all blocks are <strong>nested</strong> within every other census geography. There are also other geographies that are nested within one another, such as census tracts within counties and counties within states.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/censusgeochart.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Image from <a href="https://mcdc.missouri.edu/geography/sumlevs/">MCDC</a></figcaption><p></p>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>This diagram shows the relationship between Census-created geographies. Each of the lines represents a <strong>nested</strong> relationship. Blocks are <strong>nested</strong> within all census geographies and are building blocks for them. Going up the center of the diagram, each geography is nested within the one above it; census blocks within census block groups, census block groups within census tracts, census tracts within counties, counties within states, ect.</p>
+<p>&nbsp;</p>
+<p>This diagram is a great place to start if you want to know if your census geographies are nested.</p>
+</div></div><div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There are some missing nesting relationships missing in this diagram, such as census tracts being nested within Public Use Microdata Areas and counties being nested within Core Based Statistical Areas.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="obtaining-geographic-crosswalks" class="level2">
+<h2 class="anchored" data-anchor-id="obtaining-geographic-crosswalks">Obtaining Geographic Crosswalks</h2>
+<p>In this section, we delineate numerous ways of obtaining of creating geographic crosswalks.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Smallest Source Geography Possible
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When crosswalking unnested geographies, we strongly recommend to use the <strong>smallest geography possible</strong> for the source geography. It will dramatically reduce the error when approximating your data at the target geography. For example, if you have data at both the census tract level and the county level, and are trying to approximate to the place level, use the census tract to crosswalk to place.</p>
+</div>
+</div>
+<section id="census-geographic-transformations" class="level3">
+<h3 class="anchored" data-anchor-id="census-geographic-transformations">Census Geographic Transformations</h3>
+<p>For most geographic transformations that use geographies derived from the Census Bureau for the United States, we recommend using the <a href="https://mcdc.missouri.edu/applications/geocorr.html">Missouri Census Data Center’s Geocorr tool</a>. This tool will allow you to create crosswalks for unnested and nested data by state.</p>
+<section id="multiple-versions" class="level4">
+<h4 class="anchored" data-anchor-id="multiple-versions">Multiple Versions</h4>
+<p>There are multiple versions of the Geocorr tool, each that you can use for a different use based on the years of your data. For most geographic transformations for data with year 2010 defined geographies, we recommend using <a href="https://mcdc.missouri.edu/applications/geocorr2018.html">Geocorr 2018</a>. For 2020 geographies, use the most recent version, which as of now is <a href="https://mcdc.missouri.edu/applications/geocorr2022.html">Geocorr 2022</a></p>
+<p><img src="www/images/geocorr.png" class="img-fluid"></p>
+</section>
+<section id="choosing-states-source-and-target-geographies" class="level4">
+<h4 class="anchored" data-anchor-id="choosing-states-source-and-target-geographies">Choosing States, Source, and Target Geographies</h4>
+<p>You must first choose which states you want to include for the crosswalk. You can <em>ctrl+click</em> to choose more than one, and indeed can select all of the states using <em>shift+click</em> if you want to run a crosswalk that contains crosswalk information for the entire nation.</p>
+<p>You then will want to choose your <strong>source</strong> geography on the left side, or the geography of the data that you have. You can choose your <strong>target</strong> geography on the right side, or the geography of the data that you want to convert your data to be at the end.</p>
+</section>
+<section id="choosing-weights" class="level4">
+<h4 class="anchored" data-anchor-id="choosing-weights">Choosing Weights</h4>
+<p>You then have to decide how you want to weight the intersections between your source geography and your target geography.</p>
+<p>Which weight you choose will only matter if you have unnested data. Let’s take a look at our unnested map from before.</p>
+<p><img src="www/images/zcta_county_w_int_w_legend.png" class="img-fluid"></p>
+<p>The dark blue areas represent the <strong>intersection</strong> between the source geography (ZCTA) and the target geography (county). Geocorr gives us the option to represent that intersection in a <strong>size</strong> variable. They do this for most variables by aggregating Decennial Census data from the census block level to create as accurate of a count of the intersection as possible. These size varibles are then used as the numerator, with the denominator as the full number of that variable for the entire source geography (ZCTA), which creates the final <strong>weight</strong>.</p>
+<p>There are multiple options for weights for different years, but three common ones are:</p>
+<ul>
+<li><strong>Population weights</strong>: This is the default. You may want to use this if your data has to do with residents or about populations of people.</li>
+<li><strong>Housing Unit weights</strong>: You may want to use housing units if your data is about housing units or information about the buildings that people are living in.</li>
+<li><strong>Land Area</strong>: You may want to use land area if your data has nothing to do with where people are living or spending their time. In general, we try to not use land area too much, as population and housing unit weights are generally more relevant to questions of public policy.</li>
+</ul>
+</section>
+<section id="running-the-crosswalk-request" class="level4">
+<h4 class="anchored" data-anchor-id="running-the-crosswalk-request">Running the Crosswalk Request</h4>
+<p>To run the request to make the crosswalk click the “Run Request” button. Don’t be alarmed if nothing seems to happen immediately; the crosswalks take some time to be generated. The entire screen should change to a new page when the crosswalk has been generated for download.</p>
+</section>
+</section>
+<section id="geographic-identifiers-and-collapsing-geoids" class="level3">
+<h3 class="anchored" data-anchor-id="geographic-identifiers-and-collapsing-geoids">Geographic Identifiers and Collapsing GEOIDs</h3>
+<p>If you have determined that your geographies are nested, you may not need a formal geographic crosswalk at all. This would be the case if your data is nested in such a way that you already have all the information you need to create your own crosswalk.</p>
+<p>Below is a table from <a href="https://www.census.gov/programs-surveys/geography/guidance/geo-identifiers.html#:~:text=FIPS%20codes%20are%20assigned%20alphabetically,Native%20Hawaiian%20(AIANNH)%20areas.">the Census</a> that displays Census geographic identifiers (GEOIDs) and the hierarchical relationship of different geographic areas to one another.</p>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Geographic Level</th>
+<th>Structure</th>
+<th>Number of Digits</th>
+<th style="text-align: right;">Example Area</th>
+<th style="text-align: right;">Example GEOID</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>State</td>
+<td>STATE</td>
+<td>2</td>
+<td style="text-align: right;">Texas</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="even">
+<td>County</td>
+<td>STATE + COUNTY</td>
+<td>2+3 = 5</td>
+<td style="text-align: right;">Harris County, Texas</td>
+<td style="text-align: right;">48201</td>
+</tr>
+<tr class="odd">
+<td>Tract</td>
+<td>STATE + COUNTY + TRACT</td>
+<td>2+3+6 = 11</td>
+<td style="text-align: right;">Tract 2231 in Harris County, Texas</td>
+<td style="text-align: right;">48201223100</td>
+</tr>
+<tr class="even">
+<td>Block Group</td>
+<td>STATE + COUNTY + TRACT + BLOCK GROUP</td>
+<td>2+3+6+1 = 12</td>
+<td style="text-align: right;">Block Group 1 in Census Tract 2231 in Harris County, TX</td>
+<td style="text-align: right;">482012231001</td>
+</tr>
+<tr class="odd">
+<td>Block</td>
+<td>STATE + COUNTY + TRACT + BLOCK GROUP + BLOCK</td>
+<td>2+3+6+4 = 15</td>
+<td style="text-align: right;">Block 1050 in Census Tract 2231 in Harris County, TX</td>
+<td style="text-align: right;">482012231001050</td>
+</tr>
+<tr class="even">
+<td>Places</td>
+<td>STATE + PLACE</td>
+<td>2+5 = 7</td>
+<td style="text-align: right;">Houston, TX</td>
+<td style="text-align: right;">483500</td>
+</tr>
+<tr class="odd">
+<td>County Subdivision</td>
+<td>STATE + COUNTY + COUSUB</td>
+<td>2+3+5 = 10</td>
+<td style="text-align: right;">Pasadena CCD, Harris County, TX</td>
+<td style="text-align: right;">4820182875</td>
+</tr>
+<tr class="even">
+<td>Congressional District (113th Congress)</td>
+<td>STATE + CD</td>
+<td>2+2 = 5</td>
+<td style="text-align: right;">Connecticut District 2</td>
+<td style="text-align: right;">0902</td>
+</tr>
+<tr class="odd">
+<td>State Legislative District (Upper Chamber)</td>
+<td>STATE + SLDU</td>
+<td>2+3 = 5</td>
+<td style="text-align: right;">Connecticut State District 33</td>
+<td style="text-align: right;">09033</td>
+</tr>
+<tr class="even">
+<td>ZCTA</td>
+<td>ZCTA</td>
+<td>5</td>
+<td style="text-align: right;">Suitland, MD ZCTA</td>
+<td style="text-align: right;">20746</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s say you have your <strong>source data</strong> at the census tract level and your <strong>target</strong> data at the county level. Because the census tract identifier already has the information you need to create a county identifier (the first five digits of the full tract GEOID), you can actually create the crosswalk fairly easily!</p>
+</section>
+<section id="crosswalks-over-time" class="level3">
+<h3 class="anchored" data-anchor-id="crosswalks-over-time">Crosswalks Over Time</h3>
+<p>Large geographic changes to census geographies generally happen every 10 years during the Decennial Census. We can use a geographic crosswalk to standardize geographies over time for better comparison and empirical evaluation.</p>
+<p>There are multiple sources of crosswalks for geographies over time for various Census geographies. As is true for all geographic crosswalks, it is best to use the smallest geography possible for your source geographies. To that end, if you have data from the Census that you would like to standardize over time, it is generally best to use a census block (from old year) to census block (more current year) crosswalk.</p>
+<p>From census blocks, you can aggregate to any Census geography that you need to create your eventual target geography.</p>
+<section id="options-for-crosswalks-over-time" class="level4">
+<h4 class="anchored" data-anchor-id="options-for-crosswalks-over-time">Options for Crosswalks Over Time</h4>
+<ul>
+<li><p>IPUMS NHGIS has great <a href="https://www.nhgis.org/geographic-crosswalks#download">block-to-block crosswalks</a> that are available for each combination of decades between 1990 and 2020. They also release data already standardized over time in their time-series tables, which they offer for a subsample of Decennial Census and American Community Survey tables.</p></li>
+<li><p>The Census Bureau offers <a href="https://www.census.gov/geographies/reference-files/2010/geo/relationship-files.html?cq_ck=1537461529964#par_textimage">block-to-block crosswalks</a> from 1990-2000, 2000-2010, and 2010-2020 by state. They also offer other geographic relationship files, such as tract relationship files, for those same years.</p></li>
+<li><p>The Longitudinal Tract Database (LTDB) offers <a href="https://s4.ad.brown.edu/projects/diversity/Researcher/LTDB1.htm">tract to tract crosswalks</a> for each decade from 1970 to 2020, all with targets at 2010 tract boundaries. This is useful if your data’s smallest geography is at the tract level (so non-census data) or if you need to crosswalk census tracts from pre-1990 years.</p></li>
+</ul>
+</section>
+</section>
+<section id="zip-code-to-zcta-crosswalk" class="level3">
+<h3 class="anchored" data-anchor-id="zip-code-to-zcta-crosswalk">Zip Code to ZCTA crosswalk</h3>
+<p>Zip codes are USPS generated codes that contain information about mail delivery routes, but are not areal representations. The Census Bureau has created areal representations of zip codes - Zip Code Tabulation Areas (ZCTAs).</p>
+<p>If you have zip code data and need to have ZCTA data instead, we often use <a href="https://udsmapper.org/zip-code-to-zcta-crosswalk/">this crosswalk from UDS Mapper.</a></p>
+</section>
+<section id="creating-your-own-crosswalk" class="level3">
+<h3 class="anchored" data-anchor-id="creating-your-own-crosswalk">Creating Your Own Crosswalk</h3>
+<p>If you have non-census geographies, you may be able to create your own geographic crosswalk if you have spatial data files (like shapefiles) for your source and target geographies. If you do, you could use R’s <code>sf</code> package to create the crosswalk using <code>st_area</code> and <code>st_intersection</code>.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We recommend only creating your own crosswalks if at least one of your geographies is not from the Census Bureau. If both are, using Geocorr from the Missouri Census Data Center is recommended.</p>
+</div>
+</div>
+<section id="using-land-area-weights" class="level4">
+<h4 class="anchored" data-anchor-id="using-land-area-weights">Using Land Area Weights</h4>
+<p>This section identifies steps to create a land-area weighted crosswalk between an example source and target geography in DC. The steps are as follows:</p>
+<ol type="1">
+<li>Use the <code>sf</code> package to get the total land area of the source geography.</li>
+<li>Get the spatial intersection between the source and target geographies and find the land area of those intersections.</li>
+<li>Create the final weight by dividing the land area of the intersection by the land area of the source geography. This metric tells us what proportion of land area the intersection is of the entire source geography by land area.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">scipen =</span> <span class="dv">999</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in first shapefile</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>source <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"https://coding-library.s3.amazonaws.com/shape_1.geojson"</span>) </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># read in second shapefile</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>target <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"https://coding-library.s3.amazonaws.com/shape_2.geojson"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># get land area of your source geographic data</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>source_1 <span class="ot">&lt;-</span> source <span class="sc">%&gt;%</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source_area =</span> <span class="fu">st_area</span>(.))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># get intersections and create your crosswalk </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>int_area <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(source_1, target) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">my_int_area =</span> <span class="fu">st_area</span>(.), <span class="co"># add intersection area </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         <span class="at">land_afact =</span> <span class="fu">as.numeric</span>(my_int_area) <span class="sc">/</span> <span class="fu">as.numeric</span>(source_area)) <span class="co"># create variable that describes the percent of the source land area that is in the intersection with the target area</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="adding-population-weights" class="level4">
+<h4 class="anchored" data-anchor-id="adding-population-weights">Adding Population Weights</h4>
+<p>This section identifies how to create a population-weighted crosswalk between non-census geographies. The steps are as follows:</p>
+<ol type="1">
+<li>Do the above steps to create the spatial intersection dataset.</li>
+<li>Download the smallest level of geography variable from the census, the census block, from the 2010 Decennial Census. This dataset has both population and spatial information about census blocks in 2010.</li>
+<li>Get the centroid of the census block in order to join those blocks with our spatial intersection data. We do this because blocks likely do not fit neatly into non-census geographies.</li>
+<li>Do a spatial join of those centroids (with population data on them) to the spatial intersections we made when creating the land use crosswalk.</li>
+<li>Group by the source and target geographies and aggregate the population in order to identify the total population represented in each intersection between source and target geographies.</li>
+<li>We group by the source geography and add a column that identifies how much population is estimated to be in the entirety of each source geography.</li>
+<li>We create a population weight that is the estimated population in the intersection over the estimated population of the source geography.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># get 2010 decennial block population and spatial information</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>my_blocks <span class="ot">&lt;-</span> <span class="fu">get_decennial</span>(<span class="at">geography =</span> <span class="st">"block"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">variables =</span> <span class="st">"P001001"</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">year =</span> <span class="dv">2010</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">state =</span> <span class="st">"DC"</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">geometry =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                           )</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># create block centroids</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>block_centroids <span class="ot">&lt;-</span> <span class="fu">st_centroid</span>(my_blocks) </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># create population crosswalk </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>int_block <span class="ot">&lt;-</span> <span class="fu">st_join</span>(int_area, block_centroids) <span class="sc">%&gt;%</span>  <span class="co">#join spatial intersection data with block centroids</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span>  <span class="co"># drop the spatial information for ease of use</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source_geo, target_geo) <span class="sc">%&gt;%</span>  <span class="co"># group by the source and target geography</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">pop10 =</span> <span class="fu">sum</span>(value, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co"># aggregate and collapse the population data by source and target geography</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source_geo) <span class="sc">%&gt;%</span> <span class="co">#group by the source geography</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source_pop =</span> <span class="fu">sum</span>(pop10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co"># create total population in source geography variable</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> <span class="co"># ungroup data</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">afact =</span> pop10 <span class="sc">/</span> source_pop) <span class="co"># create final weight</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There may be some error using this method to create population-weighted crosswalks, as block centroids are used to approximate the location of where people are living, where in reality the population may be disbursed non-randomly through a block. Because census blocks are small, however, the error is likely not drastically high.</p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="using-crosswalks" class="level2">
+<h2 class="anchored" data-anchor-id="using-crosswalks">Using Crosswalks</h2>
+<p>In this section we go over how to use a geographic crosswalk to approximate data from one geography to another geography.</p>
+<p>There are multiple ways to use a crosswalk to estimate a target geography from a source geography. To better understand how one such way might work, here is a short algorithm for one of those methods.</p>
+<p>Let’s say you have data on the number of trees in a specific source geography, and you want it to be at the target geography.</p>
+<ol type="1">
+<li>Join the crosswalk to your data by the source geography identifier</li>
+<li>Multiply the number of trees by the weight</li>
+<li>Summarise and aggregate the result of Step 2 grouping by the target geography</li>
+</ol>
+<p>We will go into more detail about this method and other methods below.</p>
+<section id="crosswalk-preparation" class="level3">
+<h3 class="anchored" data-anchor-id="crosswalk-preparation">Crosswalk Preparation</h3>
+<p>While some crosswalks are already clean and ready to go, you may need to clean your crosswalk in order to make it ready to use. Below is an example of howe might clean a Geocorr tract to place crosswalk in Pennsylvania.</p>
+<p>Generally, when we get crosswalks from Geocorr, the first row of the dataset contains the column names, while the second row contains the description. This poses problems when reading in because vector types will not be guessed correctly by the <code>read_csv</code> function. To get around this, we read in the column names first and then read in the data, set the column names, and remove the unneeded description row.</p>
+<p>We then want to create geographic identifiers that are consistent across datasets from the Census (see the table above for how many digits we expect for each geography). This requires adding leading zeros and removing unnessary characters (such as periods).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># path to crosswalk </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>xwalk_path <span class="ot">&lt;-</span> <span class="st">"tract_to_place_geocorr.csv"</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># read in column names of crosswalk in order to read in easier</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>xwalk_names <span class="ot">&lt;-</span>  xwalk_path <span class="sc">%&gt;%</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="at">n_max =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># read in crosswalk and clean</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>tract_to_place_xwalk <span class="ot">&lt;-</span>  xwalk_path <span class="sc">%&gt;%</span> </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="at">col_names =</span> xwalk_names, </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">skip =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span>  <span class="co"># read in crosswalk, removing unneeded row</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tract =</span> <span class="fu">str_pad</span>(<span class="fu">as.numeric</span>(tract) <span class="sc">*</span> <span class="dv">100</span>, </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>                         <span class="dv">6</span>, </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"left"</span>, </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"0"</span>),  <span class="co"># create 6 digit tract ID, removing periods, and ensuring leading zeros</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>         <span class="at">county =</span> <span class="fu">str_pad</span>(county, </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>                          <span class="dv">5</span>, </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"left"</span>, </span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"0"</span>), <span class="co"># create 5 digit county id, adding leading zeros</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>         <span class="at">source_geoid =</span> <span class="fu">str_c</span>(county, tract), <span class="co">#combine county and tract id</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>         <span class="at">placefp =</span> <span class="fu">str_pad</span>(placefp, <span class="dv">5</span>, <span class="st">"left"</span>, <span class="st">"0"</span>), <span class="co"># create 5 digit place id, creating leading zeros </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>         <span class="at">state =</span> <span class="fu">str_pad</span>(state, <span class="dv">2</span>, <span class="st">"left"</span>, <span class="st">"0"</span>), <span class="co"># create 2 digit state id, creating leading zeros</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>         <span class="at">target_geoid =</span> <span class="fu">str_c</span>(state, placefp)) <span class="co"># combine state and place ids</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="joining-the-data" class="level3">
+<h3 class="anchored" data-anchor-id="joining-the-data">Joining the Data</h3>
+<p>The first step when using a clean crosswalk is to join or merge the data that you want to transform to the crosswalk <strong>by the source geography identifier</strong>. This is typically the Census FIPS code for Census data, but non-census crosswalks may have other ways of identifying unique source geographies.</p>
+<p>As an example, let’s say that we have a dataset with information about the number of trees at the tract level that we would like to aggregate to the place level.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tract_source_data <span class="ot">&lt;-</span> <span class="st">"tract_source_data.csv"</span> <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_csv</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">source_geoid =</span> <span class="fu">str_pad</span>(geoid, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="dv">11</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"left"</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"0"</span>))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>intersection_data <span class="ot">&lt;-</span> <span class="fu">left_join</span>(tract_source_data, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>                               tract_to_place_xwalk, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>                               <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"source_geoid"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="use-the-weight-variable" class="level3">
+<h3 class="anchored" data-anchor-id="use-the-weight-variable">Use the Weight Variable</h3>
+<p>The next step is to use the <strong>weight</strong> variable from your crosswalk to estimate your source data (such as number of trees) in the target geography. As a reminder, this weight variable is the proportion of each source geography that intersects with each target geography.</p>
+<p>There are numerous options for using this weight variable. Which option you choose whether or not you are comfortable splitting up your data into sub-parts. For example, for <strong>count</strong> variables, which are any variable with a number of persons, places, or things you can count, you may be more easy to split up the data than a <strong>non-count</strong> variable such as a median or average.</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>When you have count data and nested geographies, you can skip using weights entirely, as theoretically if your data is nested, all weights should be 1.</p>
+</div>
+</div>
+<section id="options-for-count-variables" class="level4">
+<h4 class="anchored" data-anchor-id="options-for-count-variables">Options for Count Variables</h4>
+<p>Count variables are any data type that you can count. So if the data can fit into a “number of X” kind of variable, where x is any kind of noun, then it is a count variable. Some examples include population, households, aggregate income, number of people by race/ethnicity, ect.</p>
+<p>Below are some options for using geographic crosswalks with count variables.</p>
+<section id="multiplying-source-data-by-the-weight" class="level5">
+<h5 class="anchored" data-anchor-id="multiplying-source-data-by-the-weight">Multiplying Source Data by the Weight</h5>
+<p>One of the most common ways to use the weight is to multiply the source data by the weight variable directly, which will in effect split your source data into sub-parts. We often are comfortable doing this with <strong>count</strong> variables because by definition counts can be split up into parts without much concern.</p>
+<p>For example, if there are 1000 trees in a source geography, and the geography was split 50/50 by two target geographies, we can easily attribute 500 trees to one of those and the other 500 trees to the other.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>intersection_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">trees_sub_parts =</span> number_of_trees <span class="sc">*</span> afact)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="one-target-for-each-source" class="level5">
+<h5 class="anchored" data-anchor-id="one-target-for-each-source">One Target for Each Source</h5>
+<p>Another way you might use the weight is to identify for each source geography, which intersection has the highest weight, and then keep only the rows in your <code>intersection_data</code> that has that highest weight. You may want to do this if you were not comfortable splitting up your source geography into subparts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>intersection_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(source_geoid, <span class="fu">desc</span>(afact)) <span class="sc">%&gt;%</span> <span class="co">#arrange by geoid and the weight, so that the higher weight is sorted first </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(source_geoid) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rows =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span> <span class="co"># for each source geoid, identify the first row (highest weight)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(rows <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="co"># filter for only the first row by source geoid</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>rows) <span class="co"># remove the rows variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="options-for-non-count-variables" class="level4">
+<h4 class="anchored" data-anchor-id="options-for-non-count-variables">Options for Non-Count Variables</h4>
+<p>For variables that do not contain a count, such as averages or medians, it may not make sense to split up your source data into subparts. Adding medians or averages to each other theoretically may not make much sense in and of itself, which is true even if your source and target geographies are <strong>nested</strong>.</p>
+<p>For example, let’s say you have two source geographies nested within one larger target geography. Let’s say the median incomes of these two geographies are $150,000 and $50,000. The target geography would not have a median income of $200,000, or the sum of the 2, because theoretically it would have to be between $150,000 and $50,000.</p>
+<p>So even in the nested case, this is a problem. In the unnested case, this is even more complicated as we need to figure out how to attribute source geographies to target geographies when the source geographies are split.</p>
+<section id="using-a-count-variable-to-adjust" class="level5">
+<h5 class="anchored" data-anchor-id="using-a-count-variable-to-adjust">Using a Count Variable to Adjust</h5>
+<p>One way to solve this problem is to use the count variable that the statistic is based on to account for the size of the source geography as well as allow for the aggregation and splitting of data.</p>
+<p>We do this by multiplying the average or median by the count variable that is associated with that statistic. For example, if the statistic is median household income, we would multiply the median household income by the number of households that had income in that area.</p>
+<p>For averages (not medians), this in effect creates an “aggregate” count that can be treated as any other count variable. For medians, we are weighting the median by the number of people that were used to create the statistic.</p>
+<p>We then take the result of the above and multiply that by the weight, instead of just the median itself.</p>
+<p>For example, let’s say we have data on the median cost of trees as well as information on the number of trees in an area.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>intersection_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">median_cost_subpart =</span> median_tree_cost <span class="sc">*</span> number_of_trees <span class="sc">*</span> afact)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We now just have to remember to divide by the number of trees at the target geography after doing the forthcoming aggregation step.</p>
+</section>
+<section id="using-the-target-weight-instead-of-the-source-weight" class="level5">
+<h5 class="anchored" data-anchor-id="using-the-target-weight-instead-of-the-source-weight">Using the Target Weight Instead of the Source Weight</h5>
+<p>Another way of adjusting median and average columns is to use the target weight instead of the source weight. All this means is that the weight will represent the portion of the target geography that is made up of the source geography, not the other way around. This target weight is sometimes referred to as the “second allocation factor”.</p>
+<p>To create this second allocation factor, we can use the <strong>size</strong> variable that should be included on many crosswalks. This variable is usually something like population, housing units, or land area, and represents the size of the intersection between the source and target geographies.</p>
+<p>First, we would group by the target geography and add a column that represents the sum of the size variable for each target geography. We then create a column that is the size variable over the variable we just created that represents the total size of the target geography, creating the second allocation factor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tract_to_place_xwalk <span class="ot">&lt;-</span> tract_to_place_xwalk <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(target_geoid) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">target_population =</span> <span class="fu">sum</span>(pop10, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co"># create variable represent population of target geography</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">afact2 =</span> pop10 <span class="sc">/</span> target_population) <span class="co"># create weight that represents how much of the target population is represented by each intersection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If using a Geocorr crosswalk, you can download the second allocation factor directly by clicking “Generate second allocation factor” before running the crosswalk request.</p>
+</div>
+</div>
+<p>After merging this crosswalk back onto your source data, you can create the subpart weights by multiplying the source data by the second allocation weights. Note that these subparts now represent the parts of the target geography, not the source geography, unlike the subparts from other steps.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>intersection_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">median_cost_subpart =</span> median_tree_cost <span class="sc">*</span> afact2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="summarise-by-target-geography" class="level3">
+<h3 class="anchored" data-anchor-id="summarise-by-target-geography">Summarise by Target Geography</h3>
+<p>The last step no matter which option you have chosen is to aggregate your data, grouping by the target geography. In most cases, you will be aggregating all of the subparts that you have created together to estimate the appropriate statistic at the target geography. For nested count data, you will simply be aggregating your source geographies together to create your target geography. For the option of choosing one target for each source with unnested data, you will similarly be aggregating the unsplit source data to create your target geography.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># summarise data by the target geography</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(target_geoid) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">number_of_trees =</span> <span class="fu">sum</span>(trees_sub_parts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The only other step we might have to do depends if you used a count variable to adjust your median or average non-count variables. If you did, remember that you will want to divide by the count variable after aggregation to get an approximation of the non-count statistic.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> intersection_data <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(target_geoid) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">number_of_trees =</span> <span class="fu">sum</span>(trees_sub_parts, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">median_tree_cost_agg =</span> <span class="fu">sum</span>(median_cost_subpart)) <span class="sc">%&gt;%</span> <span class="co">#summarise by the target geography</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">median_tree_cost =</span> median_tree_cost_agg <span class="sc">/</span> number_of_trees) <span class="co">#divide the adjusted median number by the count number in order to get back to an approximation of the median </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="sources-to-learn-more" class="level2">
+<h2 class="anchored" data-anchor-id="sources-to-learn-more">Sources to Learn More</h2>
+<ul>
+<li><p><a href="https://www.census.gov/programs-surveys/geography/about/glossary.html#par_textimage_5">Census Glossary of Terms</a></p></li>
+<li><p><a href="https://www.census.gov/content/dam/Census/data/developers/geoareaconcepts.pdf">Census Geographic Entities and Concepts</a></p></li>
+<li><p><a href="https://mcdc.missouri.edu/geography/sumlevs/">Geographic Summary Levels</a></p></li>
+<li><p><a href="https://mcdc.missouri.edu/applications/docs/geocorr2022-help.html">Geocorr Help</a></p></li>
+<li><p><a href="https://www.nhgis.org/geographic-crosswalks">NHGIS Geographic Crosswalk Explainer</a></p></li>
+</ul>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
