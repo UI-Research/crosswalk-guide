@@ -6,7 +6,9 @@ format:
   html:
     css: here::here("www", "web_report.css")
     toc: true
-    toc_float: TRUE
+    toc_float: 
+      collapsed: false
+    toc-location: left
     toc-depth: 5
 editor: visual
 pandoc_args: "--tab-stop=2"
