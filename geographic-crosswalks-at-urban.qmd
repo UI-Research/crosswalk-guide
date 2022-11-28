@@ -1,7 +1,7 @@
 ---
 title: "Geographic Crosswalks at Urban"
-#author: "Gabe Morrison and Chris Davis"
-#date: October, 2022
+#author: "Chris Davis and Gabe Morrison"
+#date: November, 2022
 format: 
   html:
     css: here::here("www", "web_report.css")
@@ -57,7 +57,7 @@ Each row in the crosswalk represents an **intersection** between the source and 
 
 -   **Data is available at the geography we need it to be.** It is usually much better to download data at the geography you need it than to go through a geographic crosswalk. This can save some steps and reduce error, especially if your data is not *nested* (more on that later).
 
--   **We have address data and we would like to add information regarding a geographic boundary.** If you have address data, you can do a *spatial join* instead of using a geographic crosswalk to add geographic information, as long as the geographic data (such as a shapefile) is available. To do so in R, you can use `sf::st_join` to complete this task.
+-   **We have address data and we would like to add information regarding a geographic boundary.** If you have address data, you can do a *spatial join* instead of using a geographic crosswalk to add geographic information, as long as the geographic data (such as a shapefile) is available. To do so in R, you can use `sf::st_join()` to complete this task.
 
 
 ## Are My Geographies Nested?
@@ -130,12 +130,12 @@ This diagram is a great place to start if you want to know if your census geogra
 :::
 
 ::: callout-note
-There are some missing nesting relationships missing in this diagram, such as census tracts being nested within Public Use Microdata Areas and counties being nested within Core Based Statistical Areas.
+There are some missing nesting relationships in this diagram, such as census tracts being nested within Public Use Microdata Areas and counties being nested within Core Based Statistical Areas.
 :::
 
 ## Obtaining Geographic Crosswalks
 
-In this section, we delineate numerous ways of obtaining of creating geographic crosswalks. 
+In this section, we delineate numerous ways to obtain geographic crosswalks. 
 
 :::{.callout-tip}
 ### Smallest Source Geography Possible
@@ -322,7 +322,7 @@ int_block <- st_join(int_area, block_centroids) %>%  #join spatial intersection 
 ```
 
 :::{.callout-note}
-There may be some error using this method to create population-weighted crosswalks, as block centroids are used to approximate the location of where people are living, where in reality the population may be disbursed non-randomly through a block. Because census blocks are small, however, the error is likely not drastically high.
+There may be some error using this method to create population-weighted crosswalks, as block centroids are used to approximate the location of where people are living, where in reality the population is almost certainly not located exclusively at the block centroid. Because census blocks are small, however, the error is likely not drastically high.
 :::
 
 
